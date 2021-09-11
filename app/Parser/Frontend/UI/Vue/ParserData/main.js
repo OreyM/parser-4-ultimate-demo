@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 import store from './store'
-import ParserData from './ParserData.vue'
+import ParserData from './Index.vue'
 
 
 new Vue({

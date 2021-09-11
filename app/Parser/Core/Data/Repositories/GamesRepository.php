@@ -53,4 +53,9 @@ class GamesRepository extends Repository
     {
         $this->model->where('store_id', $storeId)->update($prices);
     }
+
+    public function getGamesDataWithoutExistPaginated(array $columns, int $paginate)
+    {
+        return $this->model->select($columns)->where('is_exist', true)->paginate($paginate);
+    }
 }

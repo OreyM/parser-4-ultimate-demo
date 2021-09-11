@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Parser\ParserData\Providers;
+namespace App\Parser\ParsedData\Providers;
 
 
 use App\Core\Abstracts\Providers\ServiceProvider;

@@ -182,7 +182,7 @@ return [
         App\Parser\Core\Providers\ModuleServiceProvider::class,
         App\Parser\ExchangeRates\Providers\ModuleServiceProvider::class,
         App\Parser\Frontend\Providers\ModuleServiceProvider::class,
-        App\Parser\ParserData\Providers\ModuleServiceProvider::class,
+        App\Parser\ParsedData\Providers\ModuleServiceProvider::class,
     ],
 
     /*
