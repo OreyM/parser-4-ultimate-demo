@@ -5,6 +5,7 @@ import alert from '../../Core/helpers/alert'
 export const actionTypes = {
     setData: '[data] setData',
     getData: '[data] getData',
+    setType: '[data] setType',
     setOrder: '[data] setOrder',
     getGoldData: '[data] getGoldData'
 }
@@ -14,6 +15,12 @@ const actions = {
     [actionTypes.setData](context, params) {
         return new Promise(() => {
             context.commit(mutationTypes.loadDataStart, params)
+        })
+    },
+
+    [actionTypes.setType](context, type) {
+        return new Promise(() => {
+            context.state.type = type
         })
     },
 

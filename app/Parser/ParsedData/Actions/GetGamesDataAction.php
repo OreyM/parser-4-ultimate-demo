@@ -23,6 +23,9 @@ class GetGamesDataAction extends Action
 //        dd($this->request->type);
 
         switch ($this->request->type) {
+            case 'discount':
+                $type = ['discount', '=', true];
+                break;
             case 'gold':
                 $type = ['is_gold', '=', true];
                 break;

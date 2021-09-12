@@ -1963,12 +1963,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var actionTypes = {
   setData: '[data] setData',
   getData: '[data] getData',
+  setType: '[data] setType',
   setOrder: '[data] setOrder',
   getGoldData: '[data] getGoldData'
 };
 var actions = (_actions = {}, _defineProperty(_actions, actionTypes.setData, function (context, params) {
   return new Promise(function () {
     context.commit(_mutations__WEBPACK_IMPORTED_MODULE_0__.mutationTypes.loadDataStart, params);
+  });
+}), _defineProperty(_actions, actionTypes.setType, function (context, type) {
+  return new Promise(function () {
+    context.state.type = type;
   });
 }), _defineProperty(_actions, actionTypes.setOrder, function (context, order) {
   return new Promise(function () {
@@ -2226,22 +2231,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         page: page
       });
     },
-    getGamePass: function getGamePass() {
-      this.$store.dispatch(_data_actions__WEBPACK_IMPORTED_MODULE_1__.actionTypes.setData, {
-        type: 'game-pass',
-        order: 'name',
-        direct: 'ASC',
-        search: ''
-      });
-      this.getResults();
-    },
-    getGold: function getGold() {
-      this.$store.dispatch(_data_actions__WEBPACK_IMPORTED_MODULE_1__.actionTypes.setData, {
-        type: 'gold',
-        order: 'name',
-        direct: 'ASC',
-        search: ''
-      });
+    getGamesByType: function getGamesByType() {
+      var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      this.$store.dispatch(_data_actions__WEBPACK_IMPORTED_MODULE_1__.actionTypes.setType, type);
       this.getResults();
     },
     sort: function sort() {
@@ -3149,21 +3141,77 @@ var render = function() {
             _c("p", { staticClass: "card-description" }, [
               _c("span", [_vm._v("Image Problems")]),
               _vm._v(" |\n                        "),
-              _c("span", [_vm._v("Discount")]),
+              _c(
+                "span",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.getGamesByType("discount")
+                    }
+                  }
+                },
+                [_vm._v("Discount")]
+              ),
               _vm._v(" |\n                        "),
-              _c("span", { on: { click: _vm.getGold } }, [
-                _vm._v("Gold Games")
-              ]),
+              _c(
+                "span",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.getGamesByType("gold")
+                    }
+                  }
+                },
+                [_vm._v("Gold Games")]
+              ),
               _vm._v(" |\n                        "),
-              _c("span", [_vm._v("Free Gold Games")]),
+              _c(
+                "span",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.getGamesByType("gold-free")
+                    }
+                  }
+                },
+                [_vm._v("Free Gold Games")]
+              ),
               _vm._v(" |\n                        "),
-              _c("span", { on: { click: _vm.getGamePass } }, [
-                _vm._v("GamePass Games")
-              ]),
+              _c(
+                "span",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.getGamesByType("game-pass")
+                    }
+                  }
+                },
+                [_vm._v("GamePass Games")]
+              ),
               _vm._v(" |\n                        "),
-              _c("span", [_vm._v("EA Game")]),
+              _c(
+                "span",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.getGamesByType("ea")
+                    }
+                  }
+                },
+                [_vm._v("EA Game")]
+              ),
               _vm._v(" |\n                        "),
-              _c("span", [_vm._v("Free Game")]),
+              _c(
+                "span",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.getGamesByType("free")
+                    }
+                  }
+                },
+                [_vm._v("Free Game")]
+              ),
               _vm._v(" |\n                        "),
               _c("span", [_vm._v("Remote Games")])
             ])

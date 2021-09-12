@@ -7,12 +7,12 @@
                         <h4 class="card-title">Basic Table</h4>
                         <p class="card-description">
                             <span>Image Problems</span> |
-                            <span>Discount</span> |
-                            <span @click="getGold">Gold Games</span> |
-                            <span>Free Gold Games</span> |
-                            <span @click="getGamePass">GamePass Games</span> |
-                            <span>EA Game</span> |
-                            <span>Free Game</span> |
+                            <span @click="getGamesByType('discount')">Discount</span> |
+                            <span @click="getGamesByType('gold')">Gold Games</span> |
+                            <span @click="getGamesByType('gold-free')">Free Gold Games</span> |
+                            <span @click="getGamesByType('game-pass')">GamePass Games</span> |
+                            <span @click="getGamesByType('ea')">EA Game</span> |
+                            <span @click="getGamesByType('free')">Free Game</span> |
                             <span>Remote Games</span>
                         </p>
                     </div>
@@ -85,23 +85,8 @@
                 this.$store.dispatch(actionTypes.getData, {page: page})
             },
 
-            getGamePass() {
-                this.$store.dispatch(actionTypes.setData, {
-                    type: 'game-pass',
-                    order: 'name',
-                    direct: 'ASC',
-                    search: ''
-                })
-                this.getResults()
-            },
-
-            getGold() {
-                this.$store.dispatch(actionTypes.setData, {
-                    type: 'gold',
-                    order: 'name',
-                    direct: 'ASC',
-                    search: ''
-                })
+            getGamesByType(type = '') {
+                this.$store.dispatch(actionTypes.setType, type)
                 this.getResults()
             },
 
