@@ -7,7 +7,7 @@ namespace App\Parser\ParsedData\Actions;
 use App\Core\Abstracts\Actions\Action;
 use App\Parser\Core\Data\Repositories\GamesRepository;
 
-class __GetAllDataAction extends Action
+class __GetGoldGamesAction extends Action
 {
 
     public function __construct(GamesRepository $repository)
@@ -17,7 +17,7 @@ class __GetAllDataAction extends Action
 
     protected function run()
     {
-        $games = $this->repository->getGamesDataWithoutExistPaginated([
+        $games = $this->repository->getGoldGamesPaginated([
             'id',
             'name',
             'slug',
@@ -26,8 +26,6 @@ class __GetAllDataAction extends Action
             'img_with_title',
             'is_gold',
             'is_gold_free',
-            'is_game_pass',
-            'is_ea',
             'is_free',
             'discount',
             'selling_price',

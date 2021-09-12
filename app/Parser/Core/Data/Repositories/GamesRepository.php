@@ -54,8 +54,47 @@ class GamesRepository extends Repository
         $this->model->where('store_id', $storeId)->update($prices);
     }
 
+    public function getGames(
+        int $paginate,
+        array $type,
+        string $order,
+        string $direct
+    )
+    {
+        $q = $this->model->where('is_exist', true);
+
+        if ( ! empty($type)) {
+            $q->where([$type]);
+        }
+
+        return $q->orderBy($order, $direct)->paginate($paginate)->toJson();
+    }
+
     public function getGamesDataWithoutExistPaginated(array $columns, int $paginate)
     {
-        return $this->model->select($columns)->where('is_exist', true)->paginate($paginate);
+        return $this->model->select($columns)
+            ->where('is_exist', true)
+            ->orderBy('name')
+            ->paginate($paginate);
+    }
+
+    public function getGoldGamesPaginated(array $columns, int $paginate)
+    {
+        return $this->model->select($columns)->where([
+            ['is_exist', '=', true],
+            ['is_gold', '=', true],
+        ])
+            ->orderBy('name')
+            ->paginate($paginate);
+    }
+
+    public function getGamePassGamesPaginated(array $columns, int $paginate)
+    {
+        return $this->model->select($columns)->where([
+            ['is_exist', '=', true],
+            ['is_game_pass', '=', true],
+        ])
+            ->orderBy('name')
+            ->paginate($paginate);
     }
 }

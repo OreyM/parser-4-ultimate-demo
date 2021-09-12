@@ -11,5 +11,5 @@ const mix = require('laravel-mix')
  |
  */
 mix.js('app/Parser/Frontend/UI/Vue/Parser/main.js', 'public/js/vue/parser').vue()
-mix.js('app/Parser/Frontend/UI/Vue/ParserData/main.js', 'public/js/vue/parser-data').vue()
+mix.js('app/Parser/Frontend/UI/Vue/ParsedData/main.js', 'public/js/vue/parsed-data').vue()
 mix.sass('resources/scss/style.scss', 'public/css')

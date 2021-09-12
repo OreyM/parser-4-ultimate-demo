@@ -6,7 +6,14 @@
                     <div class="card-header">
                         <h4 class="card-title">Basic Table</h4>
                         <p class="card-description">
-                            <span>Image Problems</span> <span>Remote Games</span>
+                            <span>Image Problems</span> |
+                            <span>Discount</span> |
+                            <span @click="getGold">Gold Games</span> |
+                            <span>Free Gold Games</span> |
+                            <span @click="getGamePass">GamePass Games</span> |
+                            <span>EA Game</span> |
+                            <span>Free Game</span> |
+                            <span>Remote Games</span>
                         </p>
                     </div>
                     <div class="card-body">
@@ -14,15 +21,15 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th>Game</th>
-                                    <th>Selling Price</th>
-                                    <th>Discount</th>
-                                    <th>Difference</th>
+                                    <th @click="sort('name')">Game</th>
+                                    <th @click="sort('selling_price')">Selling Price</th>
+                                    <th @click="sort('discount')">Discount</th>
+                                    <th @click="sort('difference')">Difference</th>
                                     <th>Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="game in games.data" :key="game.id">
+                                <tr v-if="games" v-for="game in games.data" :key="game.id">
                                     <td>{{ game.name }}</td>
                                     <td>{{ game.selling_price.toFixed(2) }}</td>
                                     <td>
@@ -46,48 +53,72 @@
                 </div>
             </div>
         </div>
-
-<!--        <ul>-->
-<!--            <li v-for="game in games.data" :key="game.id">{{ game.name }}</li>-->
-<!--        </ul>-->
-<!--        <pagination :data="games" @pagination-change-page="getResults"></pagination>-->
     </div>
 </template>
 
 <script>
     import { mapState } from 'vuex'
     import dataApi from './api/dataApi'
+    import { actionTypes } from './data/actions'
 
     import Pagination from 'laravel-vue-pagination'
 
     export default {
-        name: 'ParserData',
+        name: 'ParsedData',
 
         components: { Pagination },
 
         data() {
             return {
-                games: {},
+                // games: {},
             }
         },
 
         computed: {
             ...mapState({
-
-            })
+                games: state => state.data.games,
+            }),
         },
 
         methods: {
             getResults(page = 1) {
-                dataApi.allData(page)
-                    .then(response => {
-                        this.games = response.data.data
-                    });
+                this.$store.dispatch(actionTypes.getData, {page: page})
+            },
+
+            getGamePass() {
+                this.$store.dispatch(actionTypes.setData, {
+                    type: 'game-pass',
+                    order: 'name',
+                    direct: 'ASC',
+                    search: ''
+                })
+                this.getResults()
+            },
+
+            getGold() {
+                this.$store.dispatch(actionTypes.setData, {
+                    type: 'gold',
+                    order: 'name',
+                    direct: 'ASC',
+                    search: ''
+                })
+                this.getResults()
+            },
+
+            sort(order = 'name') {
+                this.$store.dispatch(actionTypes.setOrder, order)
+                this.getResults()
             }
         },
 
         mounted() {
-            this.getResults()
+            this.$store.dispatch(actionTypes.setData, {
+                type: '',
+                order: 'name',
+                direct: 'ASC',
+                search: ''
+            })
+            this.$store.dispatch(actionTypes.getData, {page: 1})
         }
     }
 </script>

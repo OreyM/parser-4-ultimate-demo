@@ -5,7 +5,7 @@
         <h3 class="page-title"> Parsed data </h3>
     </div>
 
-    <div id="parser-data"></div>
+    <div id="parsed-data"></div>
 
 {{--    <div class="row">--}}
 {{--        <div class="col-lg-12 grid-margin stretch-card">--}}
@@ -59,5 +59,5 @@
 @endsection
 
 @section('vue')
-    <script src="{{ asset('js/vue/parser-data/main.js') }}"></script>
+    <script src="{{ asset('js/vue/parsed-data/main.js') }}"></script>
 @stop
