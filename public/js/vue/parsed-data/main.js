@@ -1992,6 +1992,7 @@ var actions = (_actions = {}, _defineProperty(_actions, actionTypes.setData, fun
     //
     // console.log(params, page, type, search)
 
+    console.log('Result', context.state.type);
     _api_dataApi__WEBPACK_IMPORTED_MODULE_1__.default.getData(page, context.state.type, context.state.order, context.state.direct, context.state.search).then(function (response) {
       context.commit(_mutations__WEBPACK_IMPORTED_MODULE_0__.mutationTypes.loadDataSuccess, response.data);
       resolve(response.data);
@@ -2137,11 +2138,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _api_dataApi__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./api/dataApi */ "./app/Parser/Frontend/UI/Vue/ParsedData/api/dataApi.js");
-/* harmony import */ var _data_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./data/actions */ "./app/Parser/Frontend/UI/Vue/ParsedData/data/actions.js");
-/* harmony import */ var laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js");
-/* harmony import */ var laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _data_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./data/actions */ "./app/Parser/Frontend/UI/Vue/ParsedData/data/actions.js");
+/* harmony import */ var laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js");
+/* harmony import */ var laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_1__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2206,20 +2206,42 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'ParsedData',
   components: {
-    Pagination: (laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_2___default())
+    Pagination: (laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_1___default())
   },
-  data: function data() {
-    return {// games: {},
-    };
-  },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapState)({
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)({
     games: function games(state) {
       return state.data.games;
     }
@@ -2227,29 +2249,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     getResults: function getResults() {
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      this.$store.dispatch(_data_actions__WEBPACK_IMPORTED_MODULE_1__.actionTypes.getData, {
+      this.$store.dispatch(_data_actions__WEBPACK_IMPORTED_MODULE_0__.actionTypes.getData, {
         page: page
       });
     },
-    getGamesByType: function getGamesByType() {
-      var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-      this.$store.dispatch(_data_actions__WEBPACK_IMPORTED_MODULE_1__.actionTypes.setType, type);
+    getGamesByType: function getGamesByType(event) {
+      this.$store.dispatch(_data_actions__WEBPACK_IMPORTED_MODULE_0__.actionTypes.setType, event.target.value);
       this.getResults();
     },
     sort: function sort() {
       var order = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'name';
-      this.$store.dispatch(_data_actions__WEBPACK_IMPORTED_MODULE_1__.actionTypes.setOrder, order);
+      this.$store.dispatch(_data_actions__WEBPACK_IMPORTED_MODULE_0__.actionTypes.setOrder, order);
       this.getResults();
     }
   },
   mounted: function mounted() {
-    this.$store.dispatch(_data_actions__WEBPACK_IMPORTED_MODULE_1__.actionTypes.setData, {
+    this.$store.dispatch(_data_actions__WEBPACK_IMPORTED_MODULE_0__.actionTypes.setData, {
       type: '',
       order: 'name',
       direct: 'ASC',
       search: ''
     });
-    this.$store.dispatch(_data_actions__WEBPACK_IMPORTED_MODULE_1__.actionTypes.getData, {
+    this.$store.dispatch(_data_actions__WEBPACK_IMPORTED_MODULE_0__.actionTypes.getData, {
       page: 1
     });
   }
@@ -3138,82 +3159,59 @@ var render = function() {
           _c("div", { staticClass: "card-header" }, [
             _c("h4", { staticClass: "card-title" }, [_vm._v("Basic Table")]),
             _vm._v(" "),
-            _c("p", { staticClass: "card-description" }, [
-              _c("span", [_vm._v("Image Problems")]),
-              _vm._v(" |\n                        "),
-              _c(
-                "span",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.getGamesByType("discount")
+            _c("div", { staticClass: "form-group row" }, [
+              _c("div", { staticClass: "col-md-6 mt-2" }, [
+                _c(
+                  "select",
+                  {
+                    staticClass: "form-control",
+                    on: {
+                      change: function($event) {
+                        return _vm.getGamesByType($event)
+                      }
                     }
-                  }
-                },
-                [_vm._v("Discount")]
-              ),
-              _vm._v(" |\n                        "),
-              _c(
-                "span",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.getGamesByType("gold")
-                    }
-                  }
-                },
-                [_vm._v("Gold Games")]
-              ),
-              _vm._v(" |\n                        "),
-              _c(
-                "span",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.getGamesByType("gold-free")
-                    }
-                  }
-                },
-                [_vm._v("Free Gold Games")]
-              ),
-              _vm._v(" |\n                        "),
-              _c(
-                "span",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.getGamesByType("game-pass")
-                    }
-                  }
-                },
-                [_vm._v("GamePass Games")]
-              ),
-              _vm._v(" |\n                        "),
-              _c(
-                "span",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.getGamesByType("ea")
-                    }
-                  }
-                },
-                [_vm._v("EA Game")]
-              ),
-              _vm._v(" |\n                        "),
-              _c(
-                "span",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.getGamesByType("free")
-                    }
-                  }
-                },
-                [_vm._v("Free Game")]
-              ),
-              _vm._v(" |\n                        "),
-              _c("span", [_vm._v("Remote Games")])
+                  },
+                  [
+                    _c("option", { attrs: { value: "" } }, [
+                      _vm._v("All Games")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "image" } }, [
+                      _vm._v("Image Problems")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "discount" } }, [
+                      _vm._v("Discount Games")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "gold" } }, [
+                      _vm._v("Gold Games")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "free-gold" } }, [
+                      _vm._v("Free Gold Games")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "game-pass" } }, [
+                      _vm._v("GamePass Games")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "ea" } }, [
+                      _vm._v("EA Games")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "free" } }, [
+                      _vm._v("Free Games")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "remote" } }, [
+                      _vm._v("Remote Games")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(0)
             ])
           ]),
           _vm._v(" "),
@@ -3313,7 +3311,7 @@ var render = function() {
                             _vm._v(_vm._s(game.difference.toFixed(2)))
                           ]),
                           _vm._v(" "),
-                          _vm._m(0, true)
+                          _vm._m(1, true)
                         ])
                       : _vm._e()
                   }),
@@ -3340,6 +3338,19 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6" }, [
+      _c("form", { staticClass: "nav-link d-lg-flex search" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", placeholder: "Search games" }
+        })
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

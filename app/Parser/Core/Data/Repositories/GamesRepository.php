@@ -58,10 +58,16 @@ class GamesRepository extends Repository
         int $paginate,
         array $type,
         string $order,
-        string $direct
+        string $direct,
+        string $search,
+        bool $remote
     )
     {
-        $q = $this->model->where('is_exist', true);
+        if ($remote) {
+            $q = $this->model->where('is_exist', false);
+        } else {
+            $q = $this->model->where('is_exist', true);
+        }
 
         if ( ! empty($type)) {
             $q->where([$type]);

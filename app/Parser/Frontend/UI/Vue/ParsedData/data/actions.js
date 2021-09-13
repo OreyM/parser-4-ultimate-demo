@@ -46,6 +46,8 @@ const actions = {
             //
             // console.log(params, page, type, search)
 
+            console.log('Result', context.state.type)
+
             dataApi.getData(
                 page,
                 context.state.type,

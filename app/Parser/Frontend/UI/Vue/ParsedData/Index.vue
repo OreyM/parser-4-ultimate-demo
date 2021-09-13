@@ -4,17 +4,44 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-header">
+
                         <h4 class="card-title">Basic Table</h4>
-                        <p class="card-description">
-                            <span>Image Problems</span> |
-                            <span @click="getGamesByType('discount')">Discount</span> |
-                            <span @click="getGamesByType('gold')">Gold Games</span> |
-                            <span @click="getGamesByType('gold-free')">Free Gold Games</span> |
-                            <span @click="getGamesByType('game-pass')">GamePass Games</span> |
-                            <span @click="getGamesByType('ea')">EA Game</span> |
-                            <span @click="getGamesByType('free')">Free Game</span> |
-                            <span>Remote Games</span>
-                        </p>
+
+                        <div class="form-group row">
+                            <div class="col-md-6 mt-2">
+                                <select @change="getGamesByType($event)" class="form-control">
+                                    <option value="">All Games</option>
+                                    <option value="image">Image Problems</option>
+                                    <option value="discount">Discount Games</option>
+                                    <option value="gold">Gold Games</option>
+                                    <option value="free-gold">Free Gold Games</option>
+                                    <option value="game-pass">GamePass Games</option>
+                                    <option value="ea">EA Games</option>
+                                    <option value="free">Free Games</option>
+                                    <option value="remote">Remote Games</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <form class="nav-link d-lg-flex search">
+                                    <input type="text" class="form-control" placeholder="Search games">
+                                </form>
+                            </div>
+
+
+                        </div>
+
+
+<!--                        <p class="card-description">-->
+<!--                            <span @click="getGamesByType">All Games</span> |-->
+<!--                            <span>Image Problems</span> |-->
+<!--                            <span @click="getGamesByType('discount')">Discount</span>-->
+<!--                            <span @click="getGamesByType('gold')">Gold Games</span>-->
+<!--                            <span @click="getGamesByType('gold-free')">Free Gold Games</span>-->
+<!--                            <span @click="getGamesByType('game-pass')">GamePass Games</span>-->
+<!--                            <span @click="getGamesByType('ea')">EA Game</span>-->
+<!--                            <span @click="getGamesByType('free')">Free Game</span>-->
+<!--                            <span>Remote Games</span>-->
+<!--                        </p>-->
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -58,7 +85,6 @@
 
 <script>
     import { mapState } from 'vuex'
-    import dataApi from './api/dataApi'
     import { actionTypes } from './data/actions'
 
     import Pagination from 'laravel-vue-pagination'
@@ -67,12 +93,6 @@
         name: 'ParsedData',
 
         components: { Pagination },
-
-        data() {
-            return {
-                // games: {},
-            }
-        },
 
         computed: {
             ...mapState({
@@ -85,8 +105,8 @@
                 this.$store.dispatch(actionTypes.getData, {page: page})
             },
 
-            getGamesByType(type = '') {
-                this.$store.dispatch(actionTypes.setType, type)
+            getGamesByType(event) {
+                this.$store.dispatch(actionTypes.setType, event.target.value)
                 this.getResults()
             },
 
