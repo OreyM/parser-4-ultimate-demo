@@ -1965,7 +1965,8 @@ var actionTypes = {
   getData: '[data] getData',
   setType: '[data] setType',
   setOrder: '[data] setOrder',
-  getGoldData: '[data] getGoldData'
+  getGoldData: '[data] getGoldData',
+  setSearch: '[data] setSearch'
 };
 var actions = (_actions = {}, _defineProperty(_actions, actionTypes.setData, function (context, params) {
   return new Promise(function () {
@@ -1985,14 +1986,13 @@ var actions = (_actions = {}, _defineProperty(_actions, actionTypes.setData, fun
       context.state.direct = 'ASC';
     }
   });
+}), _defineProperty(_actions, actionTypes.setSearch, function (context, search) {
+  return new Promise(function () {
+    context.commit(_mutations__WEBPACK_IMPORTED_MODULE_0__.mutationTypes.dataSetSearch, search);
+  });
 }), _defineProperty(_actions, actionTypes.getData, function (context, params) {
   return new Promise(function (resolve) {
-    var page = params.page; //
-    // context.commit(mutationTypes.loadDataStart, params)
-    //
-    // console.log(params, page, type, search)
-
-    console.log('Result', context.state.type);
+    var page = params.page;
     _api_dataApi__WEBPACK_IMPORTED_MODULE_1__.default.getData(page, context.state.type, context.state.order, context.state.direct, context.state.search).then(function (response) {
       context.commit(_mutations__WEBPACK_IMPORTED_MODULE_0__.mutationTypes.loadDataSuccess, response.data);
       resolve(response.data);
@@ -2051,7 +2051,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var mutationTypes = {
   loadDataStart: '[data] loadDataStart',
   loadDataSuccess: '[data] loadDataSuccess',
-  loadDataFailure: '[data] loadDataFailure'
+  loadDataFailure: '[data] loadDataFailure',
+  dataSetSearch: '[data] dataSetSearch'
 };
 var mutations = (_mutations = {}, _defineProperty(_mutations, mutationTypes.loadDataStart, function (state, payload) {
   state.isLoading = true;
@@ -2065,6 +2066,9 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, mutationTypes.load
 }), _defineProperty(_mutations, mutationTypes.loadDataFailure, function (state, payload) {
   state.isLoading = false;
   state.error = payload.data;
+}), _defineProperty(_mutations, mutationTypes.dataSetSearch, function (state, payload) {
+  state.isLoading = true;
+  state.search = payload;
 }), _mutations);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mutations);
 
@@ -2233,6 +2237,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -2241,11 +2249,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     Pagination: (laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_1___default())
   },
+  data: function data() {
+    return {
+      search: ''
+    };
+  },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)({
+    isLoading: function isLoading(state) {
+      return state.data.isLoading;
+    },
     games: function games(state) {
       return state.data.games;
     }
   })),
+  watch: {
+    search: function search(value) {
+      if (value.length > 2) {
+        this.$store.dispatch(_data_actions__WEBPACK_IMPORTED_MODULE_0__.actionTypes.setSearch, value);
+        this.getResults();
+      }
+    }
+  },
   methods: {
     getResults: function getResults() {
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
@@ -3160,7 +3184,7 @@ var render = function() {
             _c("h4", { staticClass: "card-title" }, [_vm._v("Basic Table")]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group row" }, [
-              _c("div", { staticClass: "col-md-6 mt-2" }, [
+              _c("div", { staticClass: "col-md-6" }, [
                 _c(
                   "select",
                   {
@@ -3211,7 +3235,32 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(0)
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.lazy",
+                      value: _vm.search,
+                      expression: "search",
+                      modifiers: { lazy: true }
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    disabled: _vm.isLoading,
+                    autofocus: "",
+                    type: "text",
+                    placeholder: "Search games"
+                  },
+                  domProps: { value: _vm.search },
+                  on: {
+                    change: function($event) {
+                      _vm.search = $event.target.value
+                    }
+                  }
+                })
+              ])
             ])
           ]),
           _vm._v(" "),
@@ -3311,7 +3360,7 @@ var render = function() {
                             _vm._v(_vm._s(game.difference.toFixed(2)))
                           ]),
                           _vm._v(" "),
-                          _vm._m(1, true)
+                          _vm._m(0, true)
                         ])
                       : _vm._e()
                   }),
@@ -3338,19 +3387,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6" }, [
-      _c("form", { staticClass: "nav-link d-lg-flex search" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "Search games" }
-        })
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

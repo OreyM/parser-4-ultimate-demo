@@ -8,7 +8,7 @@
                         <h4 class="card-title">Basic Table</h4>
 
                         <div class="form-group row">
-                            <div class="col-md-6 mt-2">
+                            <div class="col-md-6">
                                 <select @change="getGamesByType($event)" class="form-control">
                                     <option value="">All Games</option>
                                     <option value="image">Image Problems</option>
@@ -22,9 +22,13 @@
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <form class="nav-link d-lg-flex search">
-                                    <input type="text" class="form-control" placeholder="Search games">
-                                </form>
+                                <input
+                                    v-model.lazy="search"
+                                    :disabled="isLoading"
+                                    autofocus
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Search games">
                             </div>
 
 
@@ -94,10 +98,26 @@
 
         components: { Pagination },
 
+        data() {
+            return {
+                search: ''
+            }
+        },
+
         computed: {
             ...mapState({
+                isLoading: state => state.data.isLoading,
                 games: state => state.data.games,
             }),
+        },
+
+        watch: {
+            search: function (value) {
+                if (value.length > 2) {
+                    this.$store.dispatch(actionTypes.setSearch, value)
+                    this.getResults()
+                }
+            }
         },
 
         methods: {
@@ -113,7 +133,7 @@
             sort(order = 'name') {
                 this.$store.dispatch(actionTypes.setOrder, order)
                 this.getResults()
-            }
+            },
         },
 
         mounted() {

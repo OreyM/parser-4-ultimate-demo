@@ -7,7 +7,8 @@ export const actionTypes = {
     getData: '[data] getData',
     setType: '[data] setType',
     setOrder: '[data] setOrder',
-    getGoldData: '[data] getGoldData'
+    getGoldData: '[data] getGoldData',
+    setSearch: '[data] setSearch'
 }
 
 const actions = {
@@ -27,7 +28,6 @@ const actions = {
     [actionTypes.setOrder](context, order) {
         return new Promise(() => {
             context.state.order = order
-
             if (context.state.direct === 'ASC') {
                 context.state.direct = 'DESC'
             } else {
@@ -36,17 +36,16 @@ const actions = {
         })
     },
 
+    [actionTypes.setSearch](context, search) {
+        return new Promise(() => {
+            context.commit(mutationTypes.dataSetSearch, search)
+        })
+    },
 
     [actionTypes.getData](context, params) {
         return new Promise(resolve => {
 
             const {page} = params
-            //
-            // context.commit(mutationTypes.loadDataStart, params)
-            //
-            // console.log(params, page, type, search)
-
-            console.log('Result', context.state.type)
 
             dataApi.getData(
                 page,

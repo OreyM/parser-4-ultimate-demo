@@ -2,6 +2,8 @@ export const mutationTypes = {
     loadDataStart:   '[data] loadDataStart',
     loadDataSuccess: '[data] loadDataSuccess',
     loadDataFailure: '[data] loadDataFailure',
+
+    dataSetSearch: '[data] dataSetSearch'
 }
 
 const mutations = {
@@ -19,6 +21,11 @@ const mutations = {
     [mutationTypes.loadDataFailure](state, payload) {
         state.isLoading = false
         state.error = payload.data
+    },
+
+    [mutationTypes.dataSetSearch](state, payload) {
+        state.isLoading = true
+        state.search = payload
     },
 }
 

@@ -73,6 +73,10 @@ class GamesRepository extends Repository
             $q->where([$type]);
         }
 
+        if ( ! empty($search)) {
+            $q->where('name', 'LIKE', '%' . $search . '%');
+        }
+
         return $q->orderBy($order, $direct)->paginate($paginate)->toJson();
     }
 
