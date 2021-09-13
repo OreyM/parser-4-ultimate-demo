@@ -19,7 +19,7 @@ class AllDataController extends ApiController
 
     public function __invoke(Request $request)
     {
-        sleep(1);
+        sleep(1); // TODO for test
 
         try {
             // http://127.0.0.1:8000/data/api/v1/all?page=1&type=&order=&direct=&search=

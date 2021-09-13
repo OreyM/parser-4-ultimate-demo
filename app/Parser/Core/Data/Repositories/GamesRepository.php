@@ -57,6 +57,7 @@ class GamesRepository extends Repository
     public function getGames(
         int $paginate,
         array $type,
+        array $image,
         string $order,
         string $direct,
         string $search,
@@ -69,6 +70,12 @@ class GamesRepository extends Repository
             $q = $this->model->where('is_exist', true);
         }
 
+        if ( ! empty($image)) {
+            $q->whereNull($image[0]);
+            $q->OrWhereNull($image[1]);
+            $q->OrWhereNull($image[2]);
+        }
+
         if ( ! empty($type)) {
             $q->where([$type]);
         }
@@ -76,6 +83,8 @@ class GamesRepository extends Repository
         if ( ! empty($search)) {
             $q->where('name', 'LIKE', '%' . $search . '%');
         }
+
+//        dd($q->toSql());
 
         return $q->orderBy($order, $direct)->paginate($paginate)->toJson();
     }

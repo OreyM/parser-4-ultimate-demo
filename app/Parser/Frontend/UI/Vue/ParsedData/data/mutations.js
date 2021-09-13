@@ -3,6 +3,9 @@ export const mutationTypes = {
     loadDataSuccess: '[data] loadDataSuccess',
     loadDataFailure: '[data] loadDataFailure',
 
+    dataSetType: '[data] dataSetType',
+    dataSetOrder: '[data] dataSetOrder',
+    dataSetDirect: '[data] dataSetDirect',
     dataSetSearch: '[data] dataSetSearch'
 }
 
@@ -23,6 +26,18 @@ const mutations = {
         state.error = payload.data
     },
 
+    [mutationTypes.dataSetType](state, payload) {
+        state.isLoading = true
+        state.type = payload
+    },
+    [mutationTypes.dataSetOrder](state, payload) {
+        state.isLoading = true
+        state.order = payload
+    },
+    [mutationTypes.dataSetDirect](state, payload) {
+        state.isLoading = true
+        state.direct = payload
+    },
     [mutationTypes.dataSetSearch](state, payload) {
         state.isLoading = true
         state.search = payload

@@ -22,6 +22,8 @@ class GetGamesDataAction extends Action
 //        dd($this->request->all());
 //        dd($this->request->type);
 
+        $type = [];
+        $image = [];
         $order = $this->request->order ?: 'name';
         $direct = $this->request->direct ?: 'ASC';
         $search = $this->request->search ?: '';
@@ -29,11 +31,7 @@ class GetGamesDataAction extends Action
 
         switch ($this->request->type) {
             case 'image':
-                $type = [
-                    ['img_prewie', '=', null],
-                    ['img_art', '=', null],
-                    ['img_with_title', '=', null],
-                ];
+                $image = ['img_prewie', 'img_art', 'img_with_title'];
                 break;
             case 'discount':
                 $type = ['discount', '=', true];
@@ -57,9 +55,10 @@ class GetGamesDataAction extends Action
                 $remote = true;
             default:
                 $type = [];
+                $image = [];
         }
 
-        $data = $this->repository->getGames(15, $type, $order, $direct, $search, $remote);
+        $data = $this->repository->getGames(15, $type, $image, $order, $direct, $search, $remote);
 
         return json_decode($data);
     }

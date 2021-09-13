@@ -9,12 +9,16 @@
 
                         <div class="form-group row">
                             <div class="col-md-6">
-                                <select @change="getGamesByType($event)" class="form-control">
+                                <select
+                                    @change="getGamesByType($event)"
+                                    :disabled="isLoading"
+                                    class="form-control"
+                                >
                                     <option value="">All Games</option>
                                     <option value="image">Image Problems</option>
                                     <option value="discount">Discount Games</option>
                                     <option value="gold">Gold Games</option>
-                                    <option value="free-gold">Free Gold Games</option>
+                                    <option value="gold-free">Free Gold Games</option>
                                     <option value="game-pass">GamePass Games</option>
                                     <option value="ea">EA Games</option>
                                     <option value="free">Free Games</option>
@@ -30,24 +34,9 @@
                                     class="form-control"
                                     placeholder="Search games">
                             </div>
-
-
                         </div>
-
-
-<!--                        <p class="card-description">-->
-<!--                            <span @click="getGamesByType">All Games</span> |-->
-<!--                            <span>Image Problems</span> |-->
-<!--                            <span @click="getGamesByType('discount')">Discount</span>-->
-<!--                            <span @click="getGamesByType('gold')">Gold Games</span>-->
-<!--                            <span @click="getGamesByType('gold-free')">Free Gold Games</span>-->
-<!--                            <span @click="getGamesByType('game-pass')">GamePass Games</span>-->
-<!--                            <span @click="getGamesByType('ea')">EA Game</span>-->
-<!--                            <span @click="getGamesByType('free')">Free Game</span>-->
-<!--                            <span>Remote Games</span>-->
-<!--                        </p>-->
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" :class="isLoading ? 'loading' : '' " >
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -61,7 +50,11 @@
                                 </thead>
                                 <tbody>
                                 <tr v-if="games" v-for="game in games.data" :key="game.id">
-                                    <td>{{ game.name }}</td>
+                                    <td>
+                                        <a :href="'https://www.microsoft.com/es-ar/p/xbox/' + game.store_id">
+                                            {{ game.name }}
+                                        </a>
+                                    </td>
                                     <td>{{ game.selling_price.toFixed(2) }}</td>
                                     <td>
                                         <div v-if="game.discount" class="icon icon-box-success ">
@@ -113,10 +106,8 @@
 
         watch: {
             search: function (value) {
-                if (value.length > 2) {
-                    this.$store.dispatch(actionTypes.setSearch, value)
-                    this.getResults()
-                }
+                this.$store.dispatch(actionTypes.setSearch, value)
+                this.getResults()
             }
         },
 
@@ -149,5 +140,19 @@
 </script>
 
 <style lang="scss">
-
+    .card-body {
+        &.loading {
+            position: relative;
+            &:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                background: #000;
+                opacity: .6;
+            }
+        }
+    }
 </style>

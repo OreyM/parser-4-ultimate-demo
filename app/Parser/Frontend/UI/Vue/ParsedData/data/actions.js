@@ -21,17 +21,18 @@ const actions = {
 
     [actionTypes.setType](context, type) {
         return new Promise(() => {
-            context.state.type = type
+            context.commit(mutationTypes.dataSetType, type)
         })
     },
 
     [actionTypes.setOrder](context, order) {
         return new Promise(() => {
-            context.state.order = order
+            context.commit(mutationTypes.dataSetOrder, order)
+
             if (context.state.direct === 'ASC') {
-                context.state.direct = 'DESC'
+                context.commit(mutationTypes.dataSetDirect, 'DESC')
             } else {
-                context.state.direct = 'ASC'
+                context.commit(mutationTypes.dataSetDirect, 'ASC')
             }
         })
     },
