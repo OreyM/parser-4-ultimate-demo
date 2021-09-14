@@ -2246,6 +2246,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 
@@ -3764,7 +3767,8 @@ var render = function() {
                                   attrs: {
                                     href:
                                       "https://www.microsoft.com/es-ar/p/xbox/" +
-                                      game.store_id
+                                      game.store_id,
+                                    target: "_blank"
                                   }
                                 },
                                 [

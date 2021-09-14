@@ -51,7 +51,10 @@
                                 <tbody>
                                 <tr v-if="games" v-for="game in games.data" :key="game.id">
                                     <td>
-                                        <a :href="'https://www.microsoft.com/es-ar/p/xbox/' + game.store_id">
+                                        <a
+                                            :href="'https://www.microsoft.com/es-ar/p/xbox/' + game.store_id"
+                                            target="_blank"
+                                        >
                                             {{ game.name }}
                                         </a>
                                     </td>
