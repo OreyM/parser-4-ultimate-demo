@@ -65,29 +65,6 @@ const actions = {
         })
     },
 
-
-
-
-
-    // [actionTypes.setData](context, params) {
-    //     return new Promise(resolve => {
-    //
-    //         const {page, type, order, direct, search} = params
-    //
-    //         context.commit(mutationTypes.loadDataStart, params)
-    //
-    //         console.log(params, page, type, search)
-    //
-    //         dataApi.getData(page, type, search).then(response => {
-    //             context.commit(mutationTypes.loadDataSuccess, response.data)
-    //             resolve(response.data)
-    //         }).catch(e => {
-    //             context.commit(mutationTypes.loadDataFailure, e.response.data)
-    //             alert.error(e.response.data.messages)
-    //             console.log(e.response.data)
-    //         })
-    //     })
-    // },
 }
 
 export default actions

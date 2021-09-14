@@ -27,11 +27,6 @@ class Game
     private ?string $all_local; // JSON
     private ?float  $rating;
 
-//    private bool $is_gold = false;
-//    private bool $is_gold_free = false;
-//    private bool $is_game_pass = false;
-//    private bool $is_ea = false;
-
     private function __construct()
     {
         $this->is_new = true;
@@ -107,28 +102,6 @@ class Game
     {
         return nl2br($sourceDescription);
     }
-
-//    private function checkGameDialStatus(object $dialsStatus) : void
-//    {
-//        if (isset($dialsStatus->Affirmations)) {
-//            foreach ($dialsStatus->Affirmations as $status) {
-//                switch ($status->AffirmationId) {
-//                    case '9RVBF5P99P15':
-//                        $this->is_gold = true;
-//                        break;
-//                    case '9WNZS2ZC9L74':
-//                        $this->is_game_pass = true;
-//                        break;
-//                    case '9Z5SNB850ZPM':
-//                        $this->is_gold_free = true;
-//                        break;
-//                    case 'B0HFJ7PW900M':
-//                        $this->is_ea = true;
-//                        break;
-//                }
-//            }
-//        }
-//    }
 
     private function isX360support(?string $support) : bool
     {

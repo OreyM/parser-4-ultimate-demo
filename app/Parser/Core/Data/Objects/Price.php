@@ -4,8 +4,6 @@
 namespace App\Parser\Core\Data\Objects;
 
 
-use Carbon\Carbon;
-
 class Price
 {
     private ?bool $is_exist;
@@ -39,15 +37,9 @@ class Price
         $this->checkGameDialStatus($dirtyJsonData->LocalizedProperties[0]->EligibilityProperties);
         $this->checkPrice($dirtyJsonData, $currency);
 
-//        $this->selling_price = round($dirtyJsonData->DisplaySkuAvailabilities[0]
-//            ->Availabilities[0]->OrderManagementData->Price->ListPrice / $currency, 2);
-//        $this->old_price = round($dirtyJsonData->DisplaySkuAvailabilities[0]
-//            ->Availabilities[0]->OrderManagementData->Price->MSRP / $currency, 2);
-
         $this->discount = $this->selling_price < $this->old_price;
         $this->difference = $this->old_price - $this->selling_price;
 
-//        $this->isFree($dirtyJsonData->LocalizedProperties[0]->EligibilityProperties);
         $this->is_free = (($this->selling_price === 0.0) && ($this->old_price  === 0.0));
 
         return $this;
@@ -86,21 +78,6 @@ class Price
 
         $this->selling_price = round($price->OrderManagementData->Price->ListPrice / $currency, 2);
         $this->old_price = round($price->OrderManagementData->Price->MSRP / $currency, 2);
-    }
-
-    private function isFree() : void
-    {
-//        $this->is_free = ($this->selling_price === 0.0) && ($this->old_price  === 0.0);
-
-//        if (isset($dialsStatus->Affirmations)) {
-//            foreach ($dialsStatus->Affirmations as $status) {
-//                switch ($status->AffirmationId) {
-//                    case '9Z5SNB850ZPM': // gold
-//                        $this->is_free = true;
-//                        break;
-//                }
-//            }
-//        }
     }
 
     public function toArray() : array

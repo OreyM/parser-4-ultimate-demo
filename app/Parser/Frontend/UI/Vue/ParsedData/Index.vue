@@ -36,7 +36,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body" :class="isLoading ? 'loading' : '' " >
+                    <div
+                        class="card-body"
+                        :class="isLoading ? 'loading' : '' "
+                    >
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
