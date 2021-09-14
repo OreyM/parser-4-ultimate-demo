@@ -11,6 +11,8 @@ use App\Parser\ParsedData\Data\Requests\DataRequest;
 class GetGamesDataAction extends Action
 {
 
+    private int $perPage = 20;
+
     public function __construct(DataRequest $request, GamesRepository $repository)
     {
         $this->request = $request;
@@ -58,7 +60,7 @@ class GetGamesDataAction extends Action
                 $image = [];
         }
 
-        $data = $this->repository->getGames(15, $type, $image, $order, $direct, $search, $remote);
+        $data = $this->repository->getGames($this->perPage, $type, $image, $order, $direct, $search, $remote);
 
         return json_decode($data);
     }
