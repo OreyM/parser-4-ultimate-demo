@@ -43,34 +43,13 @@
                                 <tr>
                                     <th @click="sort('name')">Game</th>
                                     <th @click="sort('selling_price')">Selling Price</th>
-                                    <th @click="sort('discount')">Discount</th>
+                                    <th @click="sort('old_price')">Old Price</th>
                                     <th @click="sort('difference')">Difference</th>
+                                    <th @click="sort('discount')">Discount</th>
                                     <th>Status</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr v-if="games" v-for="game in games.data" :key="game.id">
-                                    <td>
-                                        <a
-                                            :href="'https://www.microsoft.com/es-ar/p/xbox/' + game.store_id"
-                                            target="_blank"
-                                        >
-                                            {{ game.name }}
-                                        </a>
-                                    </td>
-                                    <td>{{ game.selling_price.toFixed(2) }}</td>
-                                    <td>
-                                        <div v-if="game.discount" class="icon icon-box-success ">
-                                            <span class="mdi mdi-check-circle-outline icon-item"></span>
-                                        </div>
-                                        <div v-else class="icon icon-box-danger">
-                                            <span class="mdi mdi-close-circle-outline icon-item"></span>
-                                        </div>
-                                    </td>
-                                    <td>{{ game.difference.toFixed(2) }}</td>
-                                    <td><label class="badge badge-danger">View</label></td>
-                                </tr>
-                                </tbody>
+                                <table-row :games="games" />
                             </table>
                         </div>
                     </div>
@@ -87,12 +66,13 @@
     import { mapState } from 'vuex'
     import { actionTypes } from './data/actions'
 
+    import TableRow from './components/TableRow'
     import Pagination from 'laravel-vue-pagination'
 
     export default {
         name: 'ParsedData',
 
-        components: { Pagination },
+        components: { Pagination, TableRow },
 
         data() {
             return {

@@ -10,7 +10,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="{{ asset('images/favicon/favicon.ico') }}" />
 </head>
-<body>
+<body class="sidebar-icon-only">
 <div class="container-scroller">
 
     @include('frontend::components.nav.sidebar')
