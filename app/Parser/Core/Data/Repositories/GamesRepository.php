@@ -85,9 +85,14 @@ class GamesRepository extends Repository
             $q->where('name', 'LIKE', '%' . $search . '%');
         }
 
-        return $q->orderBy($order, $direct)
-            ->paginate($paginate)
-            ->toJson();
+        $result =  $q->orderBy($order, $direct)
+            ->paginate($paginate);
+
+        $result->getCollection()->each(function (Games $game) {
+            return $game->created = Carbon::parse($game->created_at)->format('d.m.Y');
+        });
+
+        return $result->toJson();
     }
 
     public function withImagesProblem()
