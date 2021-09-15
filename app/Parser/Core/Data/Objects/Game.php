@@ -73,7 +73,7 @@ class Game
 
     private function clearTitle(string $title) : string
     {
-        return str_replace(['Ⓡ', '®', '™'], '', $title);
+        return ucwords(strtolower(str_replace(['Ⓡ', '®', '™'], '', $title)));
     }
 
     private function releaseDate(string $date) : string

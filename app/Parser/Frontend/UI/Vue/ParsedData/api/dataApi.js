@@ -13,6 +13,11 @@ const getData = (page = 1,
         '&search=' + search)
 }
 
+const checkProblem = () => {
+    return axios.get('/check-problem')
+}
+
 export default {
-    getData
+    getData,
+    checkProblem
 }

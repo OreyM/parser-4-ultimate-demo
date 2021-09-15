@@ -11,7 +11,7 @@ use App\Parser\ParsedData\Data\Requests\DataRequest;
 class GetGamesDataAction extends Action
 {
 
-    private int $perPage = 20;
+    private int $perPage = 10;
 
     public function __construct(DataRequest $request, GamesRepository $repository)
     {
@@ -21,9 +21,6 @@ class GetGamesDataAction extends Action
 
     protected function run()
     {
-//        dd($this->request->all());
-//        dd($this->request->type);
-
         $type = [];
         $image = [];
         $order = $this->request->order ?: 'name';

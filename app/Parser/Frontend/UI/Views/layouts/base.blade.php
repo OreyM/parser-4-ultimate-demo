@@ -40,5 +40,7 @@
 
 @yield('vue')
 
+@yield('other-libs-scripts')
+
 </body>
 </html>

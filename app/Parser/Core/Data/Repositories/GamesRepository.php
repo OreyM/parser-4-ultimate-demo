@@ -6,6 +6,7 @@ namespace App\Parser\Core\Data\Repositories;
 
 use App\Core\Abstracts\Data\Repositories\Repository;
 use App\Parser\Core\Models\Games;
+use Carbon\Carbon;
 
 class GamesRepository extends Repository
 {
@@ -84,7 +85,18 @@ class GamesRepository extends Repository
             $q->where('name', 'LIKE', '%' . $search . '%');
         }
 
-        return $q->orderBy($order, $direct)->paginate($paginate)->toJson();
+        return $q->orderBy($order, $direct)
+            ->paginate($paginate)
+            ->toJson();
+    }
+
+    public function withImagesProblem()
+    {
+        return $this->model->whereNull('img_prewie')
+            ->where('is_exist', true)
+            ->OrWhereNull('img_art')
+            ->OrWhereNull('img_with_title')
+            ->count();
     }
 
     public function getGamesDataWithoutExistPaginated(array $columns, int $paginate)

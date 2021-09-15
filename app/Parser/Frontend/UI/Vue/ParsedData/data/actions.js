@@ -1,8 +1,11 @@
 import { mutationTypes } from './mutations'
 import dataApi from '../api/dataApi'
 import alert from '../../Core/helpers/alert'
+import toast from '../../Core/helpers/toast'
 
 export const actionTypes = {
+    initProblems: '[data] initProblems',
+
     setData: '[data] setData',
     getData: '[data] getData',
     setType: '[data] setType',
@@ -12,6 +15,24 @@ export const actionTypes = {
 }
 
 const actions = {
+    [actionTypes.initProblems](context) {
+        return new Promise(() => {
+            context.commit(mutationTypes.initProblemStart)
+
+            dataApi.checkProblem().then(response => {
+                if (response.data.data.count) {
+                    context.commit(mutationTypes.initProblemFailure, response.data)
+                    toast.warning(response.data.messages)
+                } else {
+                    context.commit(mutationTypes.initProblemSuccess)
+                    toast.info(response.data.messages)
+                }
+                resolve(response.data)
+            }).catch(e => {
+                // console.log('Eror!', e.response.data.messages)
+            })
+        })
+    },
 
     [actionTypes.setData](context, params) {
         return new Promise(() => {

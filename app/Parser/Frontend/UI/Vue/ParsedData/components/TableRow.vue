@@ -9,6 +9,14 @@
                     {{ game.name }}
                 </a>
             </td>
+
+            <td>
+                <a
+                    :href="'/parser/parsed-data/' + game.id + '/edit'"
+                    class="badge badge-success"
+                >Edit</a>
+            </td>
+
             <td>{{ game.selling_price.toFixed(2) }}</td>
             <td>{{ game.old_price.toFixed(2) }}</td>
             <td>{{ game.difference.toFixed(2) }}</td>
@@ -25,6 +33,9 @@
                 <label v-if="game.is_game_pass" class="badge badge-info">GP</label>
                 <label v-if="game.is_ea" class="badge badge-primary">EA</label>
                 <label v-if="game.is_free" class="badge badge-success">FR</label>
+            </td>
+            <td>
+                {{ game.created }}
             </td>
         </tr>
     </tbody>

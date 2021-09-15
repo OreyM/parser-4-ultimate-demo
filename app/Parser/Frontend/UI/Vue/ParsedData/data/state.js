@@ -1,5 +1,7 @@
 const state = {
     isLoading: false,
+    canUpload: false,
+    unbootableReason: '',
     error: null,
 
     currentPage: 1,

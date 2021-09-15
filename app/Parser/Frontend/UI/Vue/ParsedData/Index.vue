@@ -6,6 +6,13 @@
                     <div class="card-header">
 
                         <h4 class="card-title">Basic Table</h4>
+                        <p class="float-right">
+                            <button
+                                class="btn btn-primary"
+                                :disabled=" ! canUpload"
+                                :title="unbootableReason"
+                            >Upload data to PlayoneClub</button>
+                        </p>
 
                         <div class="form-group row">
                             <div class="col-md-6">
@@ -45,11 +52,13 @@
                                 <thead>
                                 <tr>
                                     <th @click="sort('name')">Game</th>
+                                    <th>Edit</th>
                                     <th @click="sort('selling_price')">Selling Price</th>
                                     <th @click="sort('old_price')">Old Price</th>
                                     <th @click="sort('difference')">Difference</th>
                                     <th @click="sort('discount')">Discount</th>
                                     <th>Status</th>
+                                    <th @click="sort('created_at')">Created</th>
                                 </tr>
                                 </thead>
                                 <table-row :games="games" />
@@ -87,6 +96,8 @@
             ...mapState({
                 isLoading: state => state.data.isLoading,
                 games: state => state.data.games,
+                canUpload: state => state.data.canUpload,
+                unbootableReason: state => state.data.unbootableReason
             }),
         },
 
@@ -114,6 +125,7 @@
         },
 
         mounted() {
+            this.$store.dispatch((actionTypes.initProblems))
             this.$store.dispatch(actionTypes.setData, {
                 type: '',
                 order: 'name',

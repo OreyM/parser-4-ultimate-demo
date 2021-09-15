@@ -1890,6 +1890,60 @@ var error = function error(payload) {
 
 /***/ }),
 
+/***/ "./app/Parser/Frontend/UI/Vue/Core/helpers/toast.js":
+/*!**********************************************************!*\
+  !*** ./app/Parser/Frontend/UI/Vue/Core/helpers/toast.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var timer = 5000;
+
+var success = function success(payload) {
+  cuteToast({
+    type: 'success',
+    message: payload,
+    timer: timer
+  });
+};
+
+var info = function info(payload) {
+  cuteToast({
+    type: 'info',
+    message: payload,
+    timer: timer
+  });
+};
+
+var warning = function warning(payload) {
+  cuteToast({
+    type: 'warning',
+    message: payload,
+    timer: timer
+  });
+};
+
+var error = function error(payload) {
+  cuteToast({
+    type: 'error',
+    message: payload,
+    timer: timer
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  error: error,
+  info: info,
+  success: success,
+  warning: warning
+});
+
+/***/ }),
+
 /***/ "./app/Parser/Frontend/UI/Vue/ParsedData/api/axios.js":
 /*!************************************************************!*\
   !*** ./app/Parser/Frontend/UI/Vue/ParsedData/api/axios.js ***!
@@ -1932,8 +1986,13 @@ var getData = function getData() {
   return _axios__WEBPACK_IMPORTED_MODULE_0__.default.get('/all?page=' + page + '&type=' + type + '&order=' + order + '&direct=' + direct + '&search=' + search);
 };
 
+var checkProblem = function checkProblem() {
+  return _axios__WEBPACK_IMPORTED_MODULE_0__.default.get('/check-problem');
+};
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  getData: getData
+  getData: getData,
+  checkProblem: checkProblem
 });
 
 /***/ }),
@@ -1953,6 +2012,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mutations */ "./app/Parser/Frontend/UI/Vue/ParsedData/data/mutations.js");
 /* harmony import */ var _api_dataApi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api/dataApi */ "./app/Parser/Frontend/UI/Vue/ParsedData/api/dataApi.js");
 /* harmony import */ var _Core_helpers_alert__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Core/helpers/alert */ "./app/Parser/Frontend/UI/Vue/Core/helpers/alert.js");
+/* harmony import */ var _Core_helpers_toast__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Core/helpers/toast */ "./app/Parser/Frontend/UI/Vue/Core/helpers/toast.js");
 var _actions;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1960,7 +2020,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var actionTypes = {
+  initProblems: '[data] initProblems',
   setData: '[data] setData',
   getData: '[data] getData',
   setType: '[data] setType',
@@ -1968,7 +2030,23 @@ var actionTypes = {
   getGoldData: '[data] getGoldData',
   setSearch: '[data] setSearch'
 };
-var actions = (_actions = {}, _defineProperty(_actions, actionTypes.setData, function (context, params) {
+var actions = (_actions = {}, _defineProperty(_actions, actionTypes.initProblems, function (context) {
+  return new Promise(function () {
+    context.commit(_mutations__WEBPACK_IMPORTED_MODULE_0__.mutationTypes.initProblemStart);
+    _api_dataApi__WEBPACK_IMPORTED_MODULE_1__.default.checkProblem().then(function (response) {
+      if (response.data.data.count) {
+        context.commit(_mutations__WEBPACK_IMPORTED_MODULE_0__.mutationTypes.initProblemFailure, response.data);
+        _Core_helpers_toast__WEBPACK_IMPORTED_MODULE_3__.default.warning(response.data.messages);
+      } else {
+        context.commit(_mutations__WEBPACK_IMPORTED_MODULE_0__.mutationTypes.initProblemSuccess);
+        _Core_helpers_toast__WEBPACK_IMPORTED_MODULE_3__.default.info(response.data.messages);
+      }
+
+      resolve(response.data);
+    })["catch"](function (e) {// console.log('Eror!', e.response.data.messages)
+    });
+  });
+}), _defineProperty(_actions, actionTypes.setData, function (context, params) {
   return new Promise(function () {
     context.commit(_mutations__WEBPACK_IMPORTED_MODULE_0__.mutationTypes.loadDataStart, params);
   });
@@ -2049,6 +2127,9 @@ var _mutations;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var mutationTypes = {
+  initProblemStart: '[data] initProblemStart',
+  initProblemSuccess: '[data] initProblemSuccess',
+  initProblemFailure: '[data] initProblemFailure',
   loadDataStart: '[data] loadDataStart',
   loadDataSuccess: '[data] loadDataSuccess',
   loadDataFailure: '[data] loadDataFailure',
@@ -2057,7 +2138,16 @@ var mutationTypes = {
   dataSetDirect: '[data] dataSetDirect',
   dataSetSearch: '[data] dataSetSearch'
 };
-var mutations = (_mutations = {}, _defineProperty(_mutations, mutationTypes.loadDataStart, function (state, payload) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, mutationTypes.initProblemStart, function (state) {
+  state.canUpload = false;
+  state.unbootableReason = '';
+}), _defineProperty(_mutations, mutationTypes.initProblemSuccess, function (state) {
+  state.canUpload = true;
+  state.unbootableReason = '';
+}), _defineProperty(_mutations, mutationTypes.initProblemFailure, function (state, payload) {
+  state.canUpload = false;
+  state.unbootableReason = payload.messages;
+}), _defineProperty(_mutations, mutationTypes.loadDataStart, function (state, payload) {
   state.isLoading = true;
   state.type = payload.type;
   state.order = payload.order;
@@ -2099,6 +2189,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var state = {
   isLoading: false,
+  canUpload: false,
+  unbootableReason: '',
   error: null,
   currentPage: 1,
   page: 1,
@@ -2232,6 +2324,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2253,6 +2354,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     games: function games(state) {
       return state.data.games;
+    },
+    canUpload: function canUpload(state) {
+      return state.data.canUpload;
+    },
+    unbootableReason: function unbootableReason(state) {
+      return state.data.unbootableReason;
     }
   })),
   watch: {
@@ -2279,6 +2386,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   mounted: function mounted() {
+    this.$store.dispatch(_data_actions__WEBPACK_IMPORTED_MODULE_0__.actionTypes.initProblems);
     this.$store.dispatch(_data_actions__WEBPACK_IMPORTED_MODULE_0__.actionTypes.setData, {
       type: '',
       order: 'name',
@@ -2304,6 +2412,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3720,6 +3839,20 @@ var render = function() {
           _c("div", { staticClass: "card-header" }, [
             _c("h4", { staticClass: "card-title" }, [_vm._v("Basic Table")]),
             _vm._v(" "),
+            _c("p", { staticClass: "float-right" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: {
+                    disabled: !_vm.canUpload,
+                    title: _vm.unbootableReason
+                  }
+                },
+                [_vm._v("Upload data to PlayoneClub")]
+              )
+            ]),
+            _vm._v(" "),
             _c("div", { staticClass: "form-group row" }, [
               _c("div", { staticClass: "col-md-6" }, [
                 _c(
@@ -3825,6 +3958,8 @@ var render = function() {
                           [_vm._v("Game")]
                         ),
                         _vm._v(" "),
+                        _c("th", [_vm._v("Edit")]),
+                        _vm._v(" "),
                         _c(
                           "th",
                           {
@@ -3873,7 +4008,19 @@ var render = function() {
                           [_vm._v("Discount")]
                         ),
                         _vm._v(" "),
-                        _c("th", [_vm._v("Status")])
+                        _c("th", [_vm._v("Status")]),
+                        _vm._v(" "),
+                        _c(
+                          "th",
+                          {
+                            on: {
+                              click: function($event) {
+                                return _vm.sort("created_at")
+                              }
+                            }
+                          },
+                          [_vm._v("Created")]
+                        )
                       ])
                     ]),
                     _vm._v(" "),
@@ -3947,6 +4094,17 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
+            _c("td", [
+              _c(
+                "a",
+                {
+                  staticClass: "badge badge-success",
+                  attrs: { href: "/parser/parsed-data/" + game.id + "/edit" }
+                },
+                [_vm._v("Edit")]
+              )
+            ]),
+            _vm._v(" "),
             _c("td", [_vm._v(_vm._s(game.selling_price.toFixed(2)))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(game.old_price.toFixed(2)))]),
@@ -3991,6 +4149,10 @@ var render = function() {
                     _vm._v("FR")
                   ])
                 : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v("\n            " + _vm._s(game.created) + "\n        ")
             ])
           ])
         : _vm._e()

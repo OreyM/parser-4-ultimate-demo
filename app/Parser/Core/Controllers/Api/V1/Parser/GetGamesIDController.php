@@ -13,7 +13,7 @@ use Illuminate\Http\Response;
 class GetGamesIDController extends ApiController
 {
 
-    private bool $isParseAllIDs = false;
+    private bool $isParseAllIDs = true;
 
     public function __invoke()
     {

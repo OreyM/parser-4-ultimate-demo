@@ -1,4 +1,8 @@
 export const mutationTypes = {
+    initProblemStart: '[data] initProblemStart',
+    initProblemSuccess: '[data] initProblemSuccess',
+    initProblemFailure: '[data] initProblemFailure',
+
     loadDataStart:   '[data] loadDataStart',
     loadDataSuccess: '[data] loadDataSuccess',
     loadDataFailure: '[data] loadDataFailure',
@@ -10,6 +14,20 @@ export const mutationTypes = {
 }
 
 const mutations = {
+    [mutationTypes.initProblemStart](state) {
+        state.canUpload = false
+        state.unbootableReason = ''
+    },
+    [mutationTypes.initProblemSuccess](state) {
+        state.canUpload = true
+        state.unbootableReason = ''
+    },
+    [mutationTypes.initProblemFailure](state, payload) {
+        state.canUpload = false
+        state.unbootableReason = payload.messages
+    },
+
+
     [mutationTypes.loadDataStart](state, payload) {
         state.isLoading = true
         state.type = payload.type
