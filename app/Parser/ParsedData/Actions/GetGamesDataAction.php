@@ -11,7 +11,7 @@ use App\Parser\ParsedData\Data\Requests\DataRequest;
 class GetGamesDataAction extends Action
 {
 
-    private int $perPage = 10;
+    private int $perPage = 30;
 
     public function __construct(DataRequest $request, GamesRepository $repository)
     {
@@ -30,7 +30,7 @@ class GetGamesDataAction extends Action
 
         switch ($this->request->type) {
             case 'image':
-                $image = ['img_prewie', 'img_art', 'img_with_title'];
+                $image = ['img_prewie', 'img_art'];
                 break;
             case 'discount':
                 $type = ['discount', '=', true];

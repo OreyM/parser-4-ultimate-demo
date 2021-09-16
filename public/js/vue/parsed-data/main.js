@@ -2455,6 +2455,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'TableRow',
   props: ['games']
@@ -4099,7 +4100,10 @@ var render = function() {
                 "a",
                 {
                   staticClass: "badge badge-success",
-                  attrs: { href: "/parser/parsed-data/" + game.id + "/edit" }
+                  attrs: {
+                    href: "/parser/parsed-data/" + game.id + "/edit",
+                    target: "_blank"
+                  }
                 },
                 [_vm._v("Edit")]
               )

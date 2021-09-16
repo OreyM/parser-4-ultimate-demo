@@ -74,7 +74,6 @@ class GamesRepository extends Repository
         if ( ! empty($image)) {
             $q->whereNull($image[0]);
             $q->OrWhereNull($image[1]);
-            $q->OrWhereNull($image[2]);
         }
 
         if ( ! empty($type)) {
@@ -100,7 +99,6 @@ class GamesRepository extends Repository
         return $this->model->whereNull('img_prewie')
             ->where('is_exist', true)
             ->OrWhereNull('img_art')
-            ->OrWhereNull('img_with_title')
             ->count();
     }
 

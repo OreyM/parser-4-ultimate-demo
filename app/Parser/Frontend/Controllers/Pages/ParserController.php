@@ -29,9 +29,12 @@ class ParserController extends FrontendController
 
     public function update(int $id, Request $request)
     {
+//        dd($request->all());
+//        dd($id);
+
         $result = Games::where('id', $id)->update([
-            'name'              => ucwords(strtolower($request->name)),
-            'slug'              => $request->slug ?: \Str::slug($request->name),
+            'name'              => str_replace(['Ⓡ', '®', '™'], '', $request->name),
+            'slug'              => \Str::slug($request->name),
             'description'       => $request->description,
             'img_prewie'        => $request->img_prewie,
             'img_art'           => $request->img_art,

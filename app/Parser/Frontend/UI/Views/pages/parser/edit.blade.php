@@ -8,7 +8,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="https://www.microsoft.com/es-ar/p/xbox/{{ $game->store_id }}" target="_blank">
+                    <a href="https://www.microsoft.com/en-us/p/xbox/{{ $game->store_id }}" target="_blank">
                         {{ $game->name }}
                     </a>
                 </li>
@@ -63,7 +63,10 @@
                         <div class="row mb-4">
                             <div class="col-md-12">
                                 <h5>Image Prewie</h5>
-                                <img src="{{ asset($game->img_prewie) }}" alt="..." class="img-thumbnail col-md-2">
+                                <div class="col-md-2">
+                                    <img src="{{ asset($game->img_prewie) }}" alt="..." class="img-thumbnail">
+                                </div>
+
                                 <div class="form-group mt-4">
                                     <input
                                         type="text"
@@ -74,9 +77,13 @@
                                         placeholder="Image prewie path">
                                 </div>
                             </div>
+                        </div>
+                        <div class="row mb-4">
                             <div class="col-md-12">
                                 <h5>Image Art</h5>
-                                <img src="{{ asset($game->img_art) }}" alt="..." class="img-thumbnail col-md-4">
+                                <div class="col-md-4">
+                                    <img src="{{ asset($game->img_art) }}" alt="..." class="img-thumbnail">
+                                </div>
                                 <div class="form-group mt-4">
                                     <input
                                         type="text"
@@ -87,6 +94,8 @@
                                         placeholder="Image art path">
                                 </div>
                             </div>
+                        </div>
+                        <div class="row mb-4">
                             <div class="col-md-12">
                                 <h5>Image Art with Title</h5>
                                 <img src="{{ asset($game->img_with_title) }}" alt="..." class="img-thumbnail col-md-4">

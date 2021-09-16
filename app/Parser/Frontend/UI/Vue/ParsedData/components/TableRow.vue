@@ -14,6 +14,7 @@
                 <a
                     :href="'/parser/parsed-data/' + game.id + '/edit'"
                     class="badge badge-success"
+                    target="_blank"
                 >Edit</a>
             </td>
 
