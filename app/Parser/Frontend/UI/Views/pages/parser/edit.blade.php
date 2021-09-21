@@ -233,6 +233,3 @@
         });
     </script>
 @stop
-
-http://127.0.0.1:8000/storage/games/images/vedmak-3-dikaya-oxota-izdanie-igra-goda/vedmak-3-dikaya-oxota-izdanie-igra-goda-art.jpeg
-http://127.0.0.1:8000/storage/games/images/chivalry-2/chivalry-2-art.jpeg
