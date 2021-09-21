@@ -36,7 +36,8 @@
                                 id="game-name"
                                 name="name"
                                 value="{{ old('name') ?? $game->name }}"
-                                placeholder="Game Name">
+                                placeholder="Game Name"
+                            >
                         </div>
 
                         <div class="form-group">
@@ -47,7 +48,8 @@
                                 id="game-slug"
                                 name="slug"
                                 value="{{ old('slug') ?? $game->slug }}"
-                                placeholder="Game Slug">
+                                placeholder="Game Slug"
+                            >
                         </div>
 
                         <div class="form-group">
@@ -62,7 +64,7 @@
 
                         <div class="row mb-4">
                             <div class="col-md-12">
-                                <h5>Image Prewie</h5>
+                                <h5>Image Prewie <span>/storage/games/images/</span></h5>
                                 <div class="col-md-2">
                                     <img src="{{ asset($game->img_prewie) }}" alt="..." class="img-thumbnail">
                                 </div>
@@ -80,7 +82,7 @@
                         </div>
                         <div class="row mb-4">
                             <div class="col-md-12">
-                                <h5>Image Art</h5>
+                                <h5>Image Art <span>/storage/games/images/</span></h5>
                                 <div class="col-md-4">
                                     <img src="{{ asset($game->img_art) }}" alt="..." class="img-thumbnail">
                                 </div>
@@ -97,7 +99,7 @@
                         </div>
                         <div class="row mb-4">
                             <div class="col-md-12">
-                                <h5>Image Art with Title</h5>
+                                <h5>Image Art with Title <span>/storage/games/images/</span></h5>
                                 <img src="{{ asset($game->img_with_title) }}" alt="..." class="img-thumbnail col-md-4">
                                 <div class="form-group mt-4">
                                     <input
