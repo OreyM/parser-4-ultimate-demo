@@ -32,7 +32,7 @@ class ParserInitialDataController extends ApiController
             return ErrorStartParserResponse::init()
                 ->message([
                     'title' => 'Parser initialization error!',
-                    'body' => $e->getMessage()
+                    'body'  => $e->getMessage()
                 ])->response(Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
@@ -43,8 +43,6 @@ class ParserInitialDataController extends ApiController
                 ->message($e->getMessage())
                 ->response(Response::HTTP_UNPROCESSABLE_ENTITY);
         }
-
-//        dd($currentExchangeRate->rates->ARS);
 
         return StartParserResponse::init()
             ->message('Parser initialized. All ok! You can start parsing.')

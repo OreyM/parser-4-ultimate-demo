@@ -26,54 +26,83 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex'
-    import { actionTypes } from './parser/actions'
+import { mapState } from 'vuex'
+import { actionTypes } from './parser/actions'
 
-    import { Empty, NoExistGames, NewGames, ParsedTime, TotalGames } from './components/parser/stretch-cards'
-    import ParserDashboard from './components/parser/dashboard/ParserDashboard'
-    import ParserConsole from './components/parser/dashboard/ParserConsole'
+import {
+    Empty,
+    NoExistGames,
+    NewGames,
+    ParsedTime,
+    TotalGames
+} from './components/parser/stretch-cards'
+import ParserDashboard from './components/parser/dashboard/ParserDashboard'
+import ParserConsole from './components/parser/dashboard/ParserConsole'
 
-    export default {
-        name: 'ParserStart',
+export default {
+    name: 'ParserStart',
 
-        components: { Empty, NewGames, NoExistGames, ParsedTime, ParserConsole, ParserDashboard, TotalGames },
+    components: {
+        Empty,
+        NewGames,
+        NoExistGames,
+        ParsedTime,
+        ParserConsole,
+        ParserDashboard,
+        TotalGames
+    },
 
-        computed: {
-            ...mapState({
-                isLoadStretchCards: state => state.parser.isLoadStretchCards,
-                exchangeRate: state => state.parser.exchangeRate,
-            })
-        },
+    computed: {
+        ...mapState({
+            isLoadStretchCards: state => state.parser.isLoadStretchCards,
+            exchangeRate: state => state.parser.exchangeRate
+        })
+    },
 
-        methods: {
-            startParcing() {
-
-                this.$store.dispatch(actionTypes.start).then(() => {
-                    this.$store.dispatch(actionTypes.getRuGamesID).then(() => {
-                        this.$store.dispatch(actionTypes.getArGamesID).then(() => {
-                            this.$store.dispatch(actionTypes.filterGamesID).then(() => {
-                                this.$store.dispatch(actionTypes.changeGamesTableProperties).then(() => {
-                                    this.$store.dispatch(actionTypes.savedGames).then(() => {
-                                        this.$store.dispatch(actionTypes.storeNewGames).then(() => {
-                                            this.$store.dispatch(actionTypes.updateOldGames).then(() => {
-                                                this.$store.dispatch(actionTypes.finish)
+    methods: {
+        startParcing() {
+            this.$store.dispatch(actionTypes.start).then(() => {
+                this.$store.dispatch(actionTypes.getRuGamesID).then(() => {
+                    this.$store.dispatch(actionTypes.getArGamesID).then(() => {
+                        this.$store
+                            .dispatch(actionTypes.filterGamesID)
+                            .then(() => {
+                                this.$store
+                                    .dispatch(
+                                        actionTypes.changeGamesTableProperties
+                                    )
+                                    .then(() => {
+                                        this.$store
+                                            .dispatch(actionTypes.savedGames)
+                                            .then(() => {
+                                                this.$store
+                                                    .dispatch(
+                                                        actionTypes.storeNewGames
+                                                    )
+                                                    .then(() => {
+                                                        this.$store
+                                                            .dispatch(
+                                                                actionTypes.updateOldGames
+                                                            )
+                                                            .then(() => {
+                                                                this.$store.dispatch(
+                                                                    actionTypes.finish
+                                                                )
+                                                            })
+                                                    })
                                             })
-                                        })
                                     })
-                                })
                             })
-                        })
                     })
                 })
-            },
-        },
-
-        mounted() {
-            this.$store.dispatch(actionTypes.init)
+            })
         }
+    },
+
+    mounted() {
+        this.$store.dispatch(actionTypes.init)
     }
+}
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

@@ -19,18 +19,24 @@ const actions = {
         return new Promise(() => {
             context.commit(mutationTypes.initProblemStart)
 
-            dataApi.checkProblem().then(response => {
-                if (response.data.data.count) {
-                    context.commit(mutationTypes.initProblemFailure, response.data)
-                    toast.warning(response.data.messages)
-                } else {
-                    context.commit(mutationTypes.initProblemSuccess)
-                    toast.info(response.data.messages)
-                }
-                resolve(response.data)
-            }).catch(e => {
-                // console.log('Eror!', e.response.data.messages)
-            })
+            dataApi
+                .checkProblem()
+                .then(response => {
+                    if (response.data.data.count) {
+                        context.commit(
+                            mutationTypes.initProblemFailure,
+                            response.data
+                        )
+                        toast.warning(response.data.messages)
+                    } else {
+                        context.commit(mutationTypes.initProblemSuccess)
+                        toast.info(response.data.messages)
+                    }
+                    resolve(response.data)
+                })
+                .catch(e => {
+                    // console.log('Eror!', e.response.data.messages)
+                })
         })
     },
 
@@ -66,26 +72,30 @@ const actions = {
 
     [actionTypes.getData](context, params) {
         return new Promise(resolve => {
+            const { page } = params
 
-            const {page} = params
-
-            dataApi.getData(
-                page,
-                context.state.type,
-                context.state.order,
-                context.state.direct,
-                context.state.search
-            ).then(response => {
-                context.commit(mutationTypes.loadDataSuccess, response.data)
-                resolve(response.data)
-            }).catch(e => {
-                context.commit(mutationTypes.loadDataFailure, e.response.data)
-                alert.error(e.response.data.messages)
-                console.log('Eror!', e.response.data)
-            })
+            dataApi
+                .getData(
+                    page,
+                    context.state.type,
+                    context.state.order,
+                    context.state.direct,
+                    context.state.search
+                )
+                .then(response => {
+                    context.commit(mutationTypes.loadDataSuccess, response.data)
+                    resolve(response.data)
+                })
+                .catch(e => {
+                    context.commit(
+                        mutationTypes.loadDataFailure,
+                        e.response.data
+                    )
+                    alert.error(e.response.data.messages)
+                    console.log('Eror!', e.response.data)
+                })
         })
-    },
-
+    }
 }
 
 export default actions

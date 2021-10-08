@@ -13,6 +13,7 @@ use Illuminate\Http\Response;
 
 class UpdateOldGamesController extends ApiController
 {
+
     public function __invoke()
     {
         try {

@@ -1,16 +1,24 @@
 import axios from './axios'
 
-const getData = (page = 1,
-                 type = '',
-                 order = 'name',
-                 direct = 'ASC',
-                 search = '') => {
+const getData = (
+    page = 1,
+    type = '',
+    order = 'name',
+    direct = 'ASC',
+    search = ''
+) => {
     return axios.get(
-        '/all?page=' + page +
-        '&type=' + type +
-        '&order=' + order +
-        '&direct=' + direct +
-        '&search=' + search)
+        '/all?page=' +
+            page +
+            '&type=' +
+            type +
+            '&order=' +
+            order +
+            '&direct=' +
+            direct +
+            '&search=' +
+            search
+    )
 }
 
 const checkProblem = () => {

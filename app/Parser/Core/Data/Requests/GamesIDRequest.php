@@ -14,7 +14,7 @@ use App\Core\Abstracts\Data\FormRequest;
 class GamesIDRequest extends FormRequest
 {
 
-    public function rules(): array
+    public function rules() : array
     {
         return [
 

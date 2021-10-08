@@ -12,11 +12,14 @@ class ModuleServiceProvider extends ServiceProvider
     {
         // config module
         $this->mergeConfigFrom(__DIR__.'/../Config/parser.php', 'parser');
+
         // routes
         $this->loadRoutesFrom( __DIR__ . '/../UI/Routes/web.php');
         $this->loadRoutesFrom( __DIR__ . '/../UI/Routes/api.php');
+
         // migrations
         $this->loadMigrationsFrom(__DIR__ . '/../Data/Migrations');
+
         // localisations
         $this->loadTranslationsFrom(__DIR__ . '/../UI/Langs', 'parser');
     }

@@ -1,4 +1,4 @@
-const success = (payload) => {
+const success = payload => {
     cuteAlert({
         type: 'success',
         title: payload.title,
@@ -7,7 +7,7 @@ const success = (payload) => {
     })
 }
 
-const info = (payload) => {
+const info = payload => {
     cuteAlert({
         type: 'info',
         title: payload.title,
@@ -16,7 +16,7 @@ const info = (payload) => {
     })
 }
 
-const warning = (payload) => {
+const warning = payload => {
     cuteAlert({
         type: 'warning',
         title: payload.title,
@@ -25,7 +25,7 @@ const warning = (payload) => {
     })
 }
 
-const error = (payload) => {
+const error = payload => {
     cuteAlert({
         type: 'error',
         title: payload.title,

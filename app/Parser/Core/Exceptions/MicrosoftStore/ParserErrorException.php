@@ -8,4 +8,5 @@ use App\Core\Exceptions\ExternalApiException;
 
 class ParserErrorException extends ExternalApiException
 {
+
 }

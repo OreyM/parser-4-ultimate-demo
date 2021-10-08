@@ -3,7 +3,7 @@ export const mutationTypes = {
     initProblemSuccess: '[data] initProblemSuccess',
     initProblemFailure: '[data] initProblemFailure',
 
-    loadDataStart:   '[data] loadDataStart',
+    loadDataStart: '[data] loadDataStart',
     loadDataSuccess: '[data] loadDataSuccess',
     loadDataFailure: '[data] loadDataFailure',
 
@@ -26,7 +26,6 @@ const mutations = {
         state.canUpload = false
         state.unbootableReason = payload.messages
     },
-
 
     [mutationTypes.loadDataStart](state, payload) {
         state.isLoading = true
@@ -59,7 +58,7 @@ const mutations = {
     [mutationTypes.dataSetSearch](state, payload) {
         state.isLoading = true
         state.search = payload
-    },
+    }
 }
 
 export default mutations

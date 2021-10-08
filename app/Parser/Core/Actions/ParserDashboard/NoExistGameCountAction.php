@@ -9,6 +9,7 @@ use App\Parser\Core\Data\Repositories\GamesRepository;
 
 class NoExistGameCountAction extends Action
 {
+
     public function __construct(GamesRepository $repository)
     {
 

@@ -9,7 +9,7 @@ use App\Core\Abstracts\Data\FormRequest;
 class PriceRequest extends FormRequest
 {
 
-    public function rules(): array
+    public function rules() : array
     {
         return [
 

@@ -3,7 +3,7 @@ const state = {
     finishTime: null,
 
     isLoading: false,
-    isError:   false,
+    isError: false,
 
     error: null,
 
@@ -21,7 +21,7 @@ const state = {
     noExistGameCount: 0,
     lastParsingDate: null,
 
-    exchangeRate:      null,
+    exchangeRate: null,
     argentinaCurrency: null,
 
     ruGamesID: [],
@@ -31,7 +31,7 @@ const state = {
     newGamesID: [],
     oldGamesID: [],
 
-    leftGames: 0, // how many new or old games are left to process
+    leftGames: 0 // how many new or old games are left to process
 }
 
 export default state

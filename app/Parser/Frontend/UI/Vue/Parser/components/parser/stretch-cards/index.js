@@ -4,10 +4,4 @@ import NoExistGames from './NoExistGames'
 import ParsedTime from './ParsedTime'
 import TotalGames from './TotalGames'
 
-export {
-    Empty,
-    NewGames,
-    NoExistGames,
-    ParsedTime,
-    TotalGames
-}
+export { Empty, NewGames, NoExistGames, ParsedTime, TotalGames }

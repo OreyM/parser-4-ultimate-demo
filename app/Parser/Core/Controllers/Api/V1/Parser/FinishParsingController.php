@@ -16,6 +16,7 @@ use Illuminate\Http\Response;
 
 class FinishParsingController extends ApiController
 {
+
     public function __invoke()
     {
         sleep(2); // TODO test data. Put away!

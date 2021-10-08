@@ -9,6 +9,7 @@ use App\Core\Services\CurlService;
 
 class CurrencyService
 {
+
     /**
      * @var null|objects
      */
@@ -53,7 +54,10 @@ class CurrencyService
         $this->currencies = json_decode($result->get());
 
         if (isset($this->currencies->error)) {
-            throw new ExternalApiException($this->currencies->status, "[{$this->currencies->message}] {$this->currencies->description}");
+            throw new ExternalApiException(
+                $this->currencies->status,
+                "[{$this->currencies->message}] {$this->currencies->description}"
+            );
         }
 
         return new RatesObject($this->currencies->rates);

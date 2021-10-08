@@ -3,7 +3,7 @@ export const mutationTypes = {
     parserInitSuccess: '[parser] parserInitSuccess',
     parserInitFailure: '[parser] parserInitFailure',
 
-    parserStart:  '[parser] parserStart',
+    parserStart: '[parser] parserStart',
     parserFinish: '[parser] parserFinish',
 
     parserRuGamesIDStart: '[parser] parserRuGamesIDStart',
@@ -18,23 +18,25 @@ export const mutationTypes = {
 
     parserProgressPercent: '[parser] parserProgressPercent',
 
-    parserChangeGamesPropertiesTable: '[parser] parserChangeGamesPropertiesTable',
+    parserChangeGamesPropertiesTable:
+        '[parser] parserChangeGamesPropertiesTable',
 
     parserUnionAllGamesID: '[parser] parserUnionAllGamesID',
 
-    parserSavedGamesIDStart:    '[parser] parserSavedGamesIDStart',
-    parserSavedGamesIDSuccess:  '[parser] parserSavedGamesIDSuccess',
-    parserSavedGamesIDFailure:  '[parser] parserSavedGamesIDFailure',
-    parserNewGamesID:           '[parser] parserNewGamesID',
-    parserOldGamesID:           '[parser] parserOldGamesID',
+    parserSavedGamesIDStart: '[parser] parserSavedGamesIDStart',
+    parserSavedGamesIDSuccess: '[parser] parserSavedGamesIDSuccess',
+    parserSavedGamesIDFailure: '[parser] parserSavedGamesIDFailure',
+    parserNewGamesID: '[parser] parserNewGamesID',
+    parserOldGamesID: '[parser] parserOldGamesID',
 
-    parserStoreNewGamesStart:        '[parser] parserStoreNewGamesStart',
+    parserStoreNewGamesStart: '[parser] parserStoreNewGamesStart',
     parserStoreNewGamesPackComplete: '[parser] parserStoreNewGamesPackComplete',
-    parserStoreNewGamesFailure:      '[parser] parserStoreNewGamesFailure',
+    parserStoreNewGamesFailure: '[parser] parserStoreNewGamesFailure',
 
-    parserUpdateOldGamesStart:        '[parser] parserUpdateOldGamesStart',
-    parserUpdateOldGamesPackComplete: '[parser] parserUpdateOldGamesPackComplete',
-    parserUpdateOldGamesFailure:      '[parser] parserUpdateOldGamesFailure',
+    parserUpdateOldGamesStart: '[parser] parserUpdateOldGamesStart',
+    parserUpdateOldGamesPackComplete:
+        '[parser] parserUpdateOldGamesPackComplete',
+    parserUpdateOldGamesFailure: '[parser] parserUpdateOldGamesFailure'
 }
 
 const mutations = {
@@ -150,7 +152,7 @@ const mutations = {
     },
 
     [mutationTypes.parserStoreNewGamesStart](state) {
-        state.leftGames = 0;
+        state.leftGames = 0
         state.leftGames = state.newGamesID.length
     },
     [mutationTypes.parserStoreNewGamesPackComplete](state, payload) {
@@ -164,7 +166,7 @@ const mutations = {
     },
 
     [mutationTypes.parserUpdateOldGamesStart](state) {
-        state.leftGames = 0;
+        state.leftGames = 0
         state.leftGames = state.oldGamesID.length
     },
     [mutationTypes.parserUpdateOldGamesPackComplete](state, payload) {
@@ -175,7 +177,7 @@ const mutations = {
         state.isLoading = false
         state.isError = true
         state.error = payload
-    },
+    }
 }
 
 export default mutations

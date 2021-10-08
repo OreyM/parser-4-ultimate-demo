@@ -12,6 +12,7 @@ use Illuminate\Http\Response;
 
 class ChangePropertiesController extends ApiController
 {
+
     public function __invoke()
     {
         try {

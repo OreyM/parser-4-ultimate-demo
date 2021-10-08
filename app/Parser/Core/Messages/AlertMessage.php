@@ -10,7 +10,7 @@ class AlertMessage
     {
         return [
             'alert' => [
-                'title' => 'Parsing error!',
+                'title'   => 'Parsing error!',
                 'message' => $error->getMessage(),
             ],
         ];

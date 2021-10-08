@@ -19,19 +19,17 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 
-    export default {
-        name: 'NewGames',
+export default {
+    name: 'NewGames',
 
-        computed: {
-            ...mapState({
-                newGamesCount: state =>state.parser.newGamesCount,
-            }),
-        },
+    computed: {
+        ...mapState({
+            newGamesCount: state => state.parser.newGamesCount
+        })
     }
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

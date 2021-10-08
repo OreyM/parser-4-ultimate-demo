@@ -6,8 +6,12 @@
                     <h4 class="card-title mb-1">Parser Console</h4>
                 </div>
 
-                <div class="d-flex flex-row justify-content-between border-bottom mt-2">
-                    <p class="card-title text-info mb-1"><strong>Actions | Results</strong></p>
+                <div
+                    class="d-flex flex-row justify-content-between border-bottom mt-2"
+                >
+                    <p class="card-title text-info mb-1">
+                        <strong>Actions | Results</strong>
+                    </p>
                     <p class="text-muted mb-1">Your time</p>
                 </div>
 
@@ -30,22 +34,20 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex'
-    import Notice from '../../notices/Notice'
+import { mapState } from 'vuex'
+import Notice from '../../notices/Notice'
 
-    export default {
-        name: 'ParserConsole',
+export default {
+    name: 'ParserConsole',
 
-        components: { Notice },
+    components: { Notice },
 
-        computed: {
-            ...mapState({
-                notices: state => state.notifications.notices,
-            })
-        },
+    computed: {
+        ...mapState({
+            notices: state => state.notifications.notices
+        })
     }
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

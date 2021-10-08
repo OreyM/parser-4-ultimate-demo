@@ -1,5 +1,5 @@
 export const noticeMutationTypes = {
-    addNotice:   '[notice] addNotice',
+    addNotice: '[notice] addNotice',
     clearNotice: '[notice] clearNotice'
 }
 

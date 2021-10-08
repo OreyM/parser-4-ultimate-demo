@@ -46,7 +46,6 @@ class Game
         $this->publisher = $dirtyJsonData->LocalizedProperties[0]->PublisherName;
         $this->images($dirtyJsonData->LocalizedProperties[0]->Images);
         $this->description = $this->description($dirtyJsonData->LocalizedProperties[0]->ProductDescription);
-//        $this->checkGameDialStatus($dirtyJsonData->LocalizedProperties[0]->EligibilityProperties);
         $this->release_date = $this->releaseDate($dirtyJsonData->MarketProperties[0]->OriginalReleaseDate);
         $this->min_user_age = $dirtyJsonData->MarketProperties[0]->MinimumUserAge;
         $this->x360_support = $this->isX360support($dirtyJsonData->Properties->PackageFamilyName);

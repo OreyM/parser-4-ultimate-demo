@@ -1,4 +1,4 @@
-const success = (payload) => {
+const success = payload => {
     return {
         type: 'bg-success',
         icon: 'mdi mdi-check-circle',
@@ -8,7 +8,7 @@ const success = (payload) => {
     }
 }
 
-const primary = (payload) => {
+const primary = payload => {
     return {
         type: 'bg-primary',
         icon: 'mdi mdi-camera-timer',
@@ -18,7 +18,7 @@ const primary = (payload) => {
     }
 }
 
-const info = (payload) => {
+const info = payload => {
     return {
         type: 'bg-info',
         icon: 'mdi mdi-information-outline',
@@ -28,7 +28,7 @@ const info = (payload) => {
     }
 }
 
-const warning = (payload) => {
+const warning = payload => {
     return {
         type: 'bg-warning',
         icon: 'mdi mdi-alert-circle-outline',
@@ -38,7 +38,7 @@ const warning = (payload) => {
     }
 }
 
-const error = (payload) => {
+const error = payload => {
     return {
         type: 'bg-danger',
         icon: 'mdi mdi-alert-outline',
@@ -47,7 +47,6 @@ const error = (payload) => {
         time: new Date().toLocaleTimeString()
     }
 }
-
 
 export default {
     error,

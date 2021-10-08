@@ -12,6 +12,7 @@ use Illuminate\Http\Response;
 
 class GetSavedGamesIDController extends ApiController
 {
+
     public function __invoke()
     {
         try {

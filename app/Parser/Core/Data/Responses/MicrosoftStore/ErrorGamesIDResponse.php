@@ -8,6 +8,7 @@ use App\Core\Abstracts\Data\Responses\Response;
 
 class ErrorGamesIDResponse extends Response
 {
+
     protected bool $error = true;
 
     public function message($message = null): Response

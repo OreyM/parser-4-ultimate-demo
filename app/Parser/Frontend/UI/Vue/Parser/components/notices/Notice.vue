@@ -20,13 +20,11 @@
 </template>
 
 <script>
-    export default {
-        name: 'Notice',
+export default {
+    name: 'Notice',
 
-        props: ['type', 'icon', 'title', 'body', 'time']
-    }
+    props: ['type', 'icon', 'title', 'body', 'time']
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

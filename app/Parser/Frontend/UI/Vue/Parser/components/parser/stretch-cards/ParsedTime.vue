@@ -6,19 +6,33 @@
                     <div class="d-flex align-items-center align-self-start">
                         <h3 class="mb-0">{{ total }}</h3>
                         <p
-                            :class="parsedTime.isBetter ? 'text-success' : 'text-danger'"
+                            :class="
+                                parsedTime.isBetter
+                                    ? 'text-success'
+                                    : 'text-danger'
+                            "
                             class=" ml-2 mb-0 font-weight-medium"
-                        >{{ parsedTime.difference }}s</p>
+                        >
+                            {{ parsedTime.difference }}s
+                        </p>
                     </div>
                 </div>
                 <div class="col-3">
                     <div
                         class="icon icon-box-success"
-                        :class="parsedTime.isBetter ? 'icon-box-success' : 'icon-box-danger'"
+                        :class="
+                            parsedTime.isBetter
+                                ? 'icon-box-success'
+                                : 'icon-box-danger'
+                        "
                     >
                         <span
                             class="icon-item mdi"
-                            :class="parsedTime.isBetter ? 'mdi-arrow-top-right' : 'mdi-arrow-bottom-left'"
+                            :class="
+                                parsedTime.isBetter
+                                    ? 'mdi-arrow-top-right'
+                                    : 'mdi-arrow-bottom-left'
+                            "
                         ></span>
                     </div>
                 </div>
@@ -29,22 +43,19 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex'
-    import times from '../../../helpers/times'
+import { mapState } from 'vuex'
+import times from '../../../helpers/times'
 
-    export default {
-        name: 'ParsedTime',
+export default {
+    name: 'ParsedTime',
 
-        computed: {
-            ...mapState({
-                parsedTime: state =>state.parser.parsedTime,
-                total: state => times.minutes(state.parser.parsedTime.total),
-            }),
-        },
-
+    computed: {
+        ...mapState({
+            parsedTime: state => state.parser.parsedTime,
+            total: state => times.minutes(state.parser.parsedTime.total)
+        })
     }
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

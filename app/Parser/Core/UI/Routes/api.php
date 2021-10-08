@@ -19,7 +19,6 @@ Route::group([
     'prefix' => $apiType . '/api/' . $apiVersion,
     'as' => 'api.parser.'
 ], function () {
-
     Route::get('/init', ParserInitialDataController::class)->name('init');
     Route::get('/start', StartParsingController::class)->name('start');
     Route::post('/finish', FinishParsingController::class)->name('finish');

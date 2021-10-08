@@ -1,6 +1,6 @@
-const timer = 5000;
+const timer = 5000
 
-const success = (payload) => {
+const success = payload => {
     cuteToast({
         type: 'success',
         message: payload,
@@ -8,7 +8,7 @@ const success = (payload) => {
     })
 }
 
-const info = (payload) => {
+const info = payload => {
     cuteToast({
         type: 'info',
         message: payload,
@@ -16,7 +16,7 @@ const info = (payload) => {
     })
 }
 
-const warning = (payload) => {
+const warning = payload => {
     cuteToast({
         type: 'warning',
         message: payload,
@@ -24,7 +24,7 @@ const warning = (payload) => {
     })
 }
 
-const error = (payload) => {
+const error = payload => {
     cuteToast({
         type: 'error',
         message: payload,

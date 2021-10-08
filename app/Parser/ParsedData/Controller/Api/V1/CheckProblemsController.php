@@ -14,8 +14,6 @@ class CheckProblemsController extends ApiController
 {
     public function __invoke()
     {
-//        \Action::call(CheckImagesProblemAction::class);
-
         if ($count = \Action::call(CheckImagesProblemAction::class)) {
             return HaveProblemResponse::init()
                 ->message('Found problems with reference to the game images. Fix it.')

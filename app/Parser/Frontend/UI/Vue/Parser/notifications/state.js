@@ -1,5 +1,5 @@
 const state = {
-    notices: [],
+    notices: []
 }
 
 export default state
